@@ -1,95 +1,99 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
+
+let data = [
+  {
+    id: 1,
+    name: "Backpack",
+    description:
+      "Uma mochila resistente com compartimentos secretos, ideal para aventureiros que precisam carregar uma variedade de itens essenciais em suas jornadas épicas.",
+    image: "https://softstar.s3.amazonaws.com/items/backpack.png",
+    price: 182,
+    createdAt: "2024-07-18T23:55:43.238Z",
+  },
+  {
+    id: 2,
+    name: "Boots of Speed",
+    description:
+      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
+    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
+    price: 338,
+    createdAt: "2024-07-18T23:55:43.238Z",
+  },
+  {
+    id: 3,
+    name: "Boots of Speed",
+    description:
+      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
+    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
+    price: 338,
+    createdAt: "2024-07-18T23:55:43.238Z",
+  },
+  {
+    id: 4,
+    name: "Boots of Speed",
+    description:
+      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
+    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
+    price: 338,
+    createdAt: "2024-07-18T23:55:43.238Z",
+  },
+  {
+    id: 5,
+    name: "Boots of Speed",
+    description:
+      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
+    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
+    price: 338,
+    createdAt: "2024-07-18T23:55:43.238Z",
+  },
+  {
+    id: 6,
+    name: "Boots of Speed",
+    description:
+      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
+    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
+    price: 338,
+    createdAt: "2024-07-18T23:55:43.238Z",
+  },
+];
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main className={styles.container}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>StarSoft</h1>
+        <span className={styles.cart}>Cart</span>
+      </header>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+      <div className={styles.contentItems}>
+        {data.map((el) => (
+          <div key={el.id} className={styles.item}>
             <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              className={styles.img}
+              src={el.image}
+              alt={el.name}
+              width={200}
+              height={200}
+              priority={true}
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
+            <div className={styles.box1}>
+              <h2 className={styles.name}>{el.name}</h2>
+              <p className={styles.description}>{el.description}</p>
+            </div>
+            <div className={styles.box2}>
+              <h2 className={styles.price}>{el.price}</h2>
+              <button className={styles.addCart}>Adicionar ao carrinho</button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.contentLoading}>
+        <button className={styles.loadingMore}>Carregar mais</button>
+      </div>
       <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <h4>STARSOFT &#169; TODOS OS DIREITOS RESERVADOS</h4>
       </footer>
-    </div>
+    </main>
   );
 }
