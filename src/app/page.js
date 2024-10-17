@@ -1,64 +1,24 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.scss";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
-let data = [
-  {
-    id: 1,
-    name: "Backpack",
-    description:
-      "Uma mochila resistente com compartimentos secretos, ideal para aventureiros que precisam carregar uma variedade de itens essenciais em suas jornadas épicas.",
-    image: "https://softstar.s3.amazonaws.com/items/backpack.png",
-    price: 182,
-    createdAt: "2024-07-18T23:55:43.238Z",
-  },
-  {
-    id: 2,
-    name: "Boots of Speed",
-    description:
-      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
-    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
-    price: 338,
-    createdAt: "2024-07-18T23:55:43.238Z",
-  },
-  {
-    id: 3,
-    name: "Boots of Speed",
-    description:
-      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
-    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
-    price: 338,
-    createdAt: "2024-07-18T23:55:43.238Z",
-  },
-  {
-    id: 4,
-    name: "Boots of Speed",
-    description:
-      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
-    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
-    price: 338,
-    createdAt: "2024-07-18T23:55:43.238Z",
-  },
-  {
-    id: 5,
-    name: "Boots of Speed",
-    description:
-      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
-    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
-    price: 338,
-    createdAt: "2024-07-18T23:55:43.238Z",
-  },
-  {
-    id: 6,
-    name: "Boots of Speed",
-    description:
-      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
-    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
-    price: 338,
-    createdAt: "2024-07-18T23:55:43.238Z",
-  },
-];
+const fetchProducts = async () => {
+  const { data } = await axios.get(
+    "https://starsoft-challenge-7dfd4a56a575.herokuapp.com/v1/products?page=1&limit=8"
+  );
+  return data.data;
+};
 
 export default function Home() {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["data"],
+    queryFn: fetchProducts,
+  });
+
+  if (isLoading) return <div>Carregando produtos...</div>;
+  if (error) return <div>Erro ao carregar produtos: {error.message}</div>;
   return (
     <main className={styles.container}>
       <header className={styles.header}>
