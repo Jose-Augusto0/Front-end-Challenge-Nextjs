@@ -63,20 +63,26 @@ export default function Home() {
     <main className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.title}>StarSoft</h1>
-        <span className={styles.cart}>Cart</span>
+        <span className={styles.cart}>
+          <i>Cart</i>
+          <a>0</a>
+        </span>
       </header>
 
       <div className={styles.contentItems}>
         {data.map((el) => (
           <div key={el.id} className={styles.item}>
-            <Image
-              className={styles.img}
-              src={el.image}
-              alt={el.name}
-              width={200}
-              height={200}
-              priority={true}
-            />
+            <div className={styles.contentImg}>
+              <Image
+                className={styles.img}
+                src={el.image}
+                alt={el.name}
+                width={150}
+                height={150}
+                priority={true}
+              />
+            </div>
+
             <div className={styles.box1}>
               <h2 className={styles.name}>{el.name}</h2>
               <p className={styles.description}>{el.description}</p>
