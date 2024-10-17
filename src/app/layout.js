@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import ClientLayout from "./ClientLayout"; // Importe o novo layout de cliente
+import ClientLayout from "./ClientLayout"; 
 import "./globals.css";
 
 const geistSans = localFont({

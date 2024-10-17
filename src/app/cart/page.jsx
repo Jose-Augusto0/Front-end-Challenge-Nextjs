@@ -1,28 +1,56 @@
+"use client";
 import styles from "./cart.module.scss";
 import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-let data = [
-  {
-    id: 1,
-    name: "Backpack",
-    description:
-      "Uma mochila resistente com compartimentos secretos, ideal para aventureiros que precisam carregar uma variedade de itens essenciais em suas jornadas épicas.",
-    image: "https://softstar.s3.amazonaws.com/items/backpack.png",
-    price: 182,
-    createdAt: "2024-07-18T23:55:43.238Z",
-  },
-  {
-    id: 2,
-    name: "Boots of Speed",
-    description:
-      "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
-    image: "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
-    price: 338,
-    createdAt: "2024-07-18T23:55:43.238Z",
-  },
-];
+const fetchCart = async () => {
+  const { data } = await axios.get("http://localhost:3001/cart");
+  return data;
+};
 
 export default function Cart() {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["cart"],
+    queryFn: fetchCart,
+  });
+
+  const [quantities, setQuantities] = useState({});
+
+  useEffect(() => {
+    if (data) {
+      const initialQuantities = data.reduce((acc, el) => {
+        acc[el.id] = 1;
+        return acc;
+      }, {});
+      setQuantities(initialQuantities);
+    }
+  }, [data]);
+
+  const handleIncrement = (id) => {
+    setQuantities((prev) => ({ ...prev, [id]: (prev[id] || 1) + 1 }));
+  };
+
+  const handleDecrement = (id) => {
+    setQuantities((prev) => {
+      const newQuantity = (prev[id] || 1) - 1;
+      return { ...prev, [id]: newQuantity < 1 ? 1 : newQuantity };
+    });
+  };
+
+  if (isLoading) return <div>Carregando carrinho...</div>;
+  if (error) return <div>Erro ao carregar o carrinho: {error.message}</div>;
+
+  if (!data || data.length === 0) {
+    return <div>Seu carrinho está vazio!</div>;
+  }
+
+  const total = data.reduce((acc, el) => {
+    const quantity = quantities[el.id] || 1;
+    return acc + el.price * quantity;
+  }, 0);
+
   return (
     <main className={styles.contentCart}>
       <div className={styles.header}>
@@ -48,9 +76,9 @@ export default function Cart() {
             </div>
             <div className={styles.quantityContent}>
               <div className={styles.quantity}>
-                <button>+</button>
-                <p>3</p>
-                <button>-</button>
+                <button onClick={() => handleIncrement(el.id)}>+</button>
+                <p>{quantities[el.id] || 1}</p>
+                <button onClick={() => handleDecrement(el.id)}>-</button>
               </div>
               <h4>apagar</h4>
             </div>
@@ -59,7 +87,7 @@ export default function Cart() {
       ))}
       <div className={styles.total}>
         <h3>Total</h3>
-        <h3>60 ETH</h3>
+        <h3>{total} ETH</h3>
       </div>
       <div className={styles.btnBuyContent}>
         <button className={styles.btnBuy}>Finalizar compra</button>
