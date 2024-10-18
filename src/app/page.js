@@ -139,7 +139,7 @@ export default function Home() {
         </button>
       </div>
 
-      {isCartOpen && <Cart />}
+      {isCartOpen && <Cart onClose={toggleCart} />} 
 
       <footer className={styles.footer}>
         <h4>STARSOFT &#169; TODOS OS DIREITOS RESERVADOS</h4>

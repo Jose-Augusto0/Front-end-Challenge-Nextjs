@@ -1,5 +1,8 @@
 .contentCart {
+  display: flex;
   position: fixed;
+  gap: 10px;
+  flex-direction: column;
   top: 0;
   right: 0;
   width: 430px;

@@ -18,7 +18,7 @@ const deleteFromCartApi = async (itemId) => {
   return response.data;
 };
 
-export default function Cart() {
+export default function Cart({onClose}) {
   const queryClient = useQueryClient();
   const { data, error, isLoading } = useQuery({
     queryKey: ["cart"],
@@ -74,7 +74,7 @@ export default function Cart() {
   return (
     <main className={styles.contentCart}>
       <div className={styles.header}>
-        <IoArrowBackSharp className={styles.back} size={40} />
+        <IoArrowBackSharp className={styles.back} size={40} onClick={onClose}/>
         <h3>Mochila de compras</h3>
       </div>
       {data.map((el) => (
