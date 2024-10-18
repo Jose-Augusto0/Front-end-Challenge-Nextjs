@@ -10,17 +10,17 @@ import { FaEthereum } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const fetchCart = async () => {
-  const { data } = await axios.get("http://localhost:3001/cart");
+  const { data } = await axios.get("https://api-cart.vercel.app/?vercelToolbarCode=aXKc2GqL3Ig0A_9");
   return data;
 };
 
 const deleteFromCartApi = async (itemId) => {
-  const response = await axios.delete(`http://localhost:3001/cart/${itemId}`);
+  const response = await axios.delete(`https://api-cart.vercel.app/?vercelToolbarCode=aXKc2GqL3Ig0A_9/${itemId}`);
   return response.data;
 };
 
 const clearCartApi = async () => {
-  const response = await axios.delete("http://localhost:3001/cart");
+  const response = await axios.delete("https://api-cart.vercel.app/?vercelToolbarCode=aXKc2GqL3Ig0A_9");
   return response.data;
 };
 

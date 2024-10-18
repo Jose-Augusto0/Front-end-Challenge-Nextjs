@@ -18,12 +18,12 @@ const fetchNfts = async (page, limit = 4) => {
 };
 
 const fetchCart = async () => {
-  const { data } = await axios.get("http://localhost:3001/cart");
+  const { data } = await axios.get("https://api-cart.vercel.app/?vercelToolbarCode=aXKc2GqL3Ig0A_9");
   return data;
 };
 
 const addToCartApi = async (nft) => {
-  const response = await axios.post("http://localhost:3001/cart", nft);
+  const response = await axios.post("https://api-cart.vercel.app/?vercelToolbarCode=aXKc2GqL3Ig0A_9", nft);
   return response.data;
 };
 
