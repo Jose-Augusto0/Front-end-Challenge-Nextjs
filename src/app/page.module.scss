@@ -1,12 +1,12 @@
 // Paleta & etc
 
 $color-1: #ff8310;
-$color2:#CCCCCC;
-$color3:#191A20;
-$color4:#232323;
+$color2: #cccccc;
+$color3: #191a20;
+$color4: #232323;
 $border-radius-default: 8px;
-$padding-default:20px;
-$gap-default:10px;
+$padding-default: 20px;
+$gap-default: 10px;
 
 .container {
   display: flex;
@@ -21,24 +21,23 @@ $gap-default:10px;
 .header {
   display: flex;
   width: 100%;
-  border-bottom: 1px solid green;
+  border-bottom: 1px solid #232323;
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
 }
 
-.cart{
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-
-  }
+.cart {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 
 .contentItems {
   display: flex;
   gap: 25px;
-  border-bottom: 1px solid yellow;
   padding: 40px 10px;
   align-items: center;
   justify-content: center;
@@ -58,13 +57,13 @@ $gap-default:10px;
   padding: 10px;
 }
 
-.contentImg{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $color4;
-    width: 250px;
-    height: 250px;
+.contentImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color4;
+  width: 250px;
+  height: 250px;
 }
 
 .box1 {
@@ -90,21 +89,37 @@ $gap-default:10px;
   padding: $padding-default;
   border-radius: $border-radius-default;
   width: 220px;
+  cursor: pointer;
 }
 
-.loadingMore{
-    background-color: $color2;
-    border: transparent;
-    padding: $padding-default;
-    width: 300px;
-    border-radius: $border-radius-default;
+.price {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.contentLoading{
-    margin: 100px;
+
+.coin {
+  background-color: #627eea;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.loadingMore {
+  background-color: $color2;
+  border: transparent;
+  padding: $padding-default;
+  width: 300px;
+  border-radius: $border-radius-default;
+  cursor: pointer;
+}
+.contentLoading {
+  margin: 100px;
 }
 
 .footer {
-  border: 1px solid red;
   width: 100%;
   padding: $padding-default;
   display: flex;

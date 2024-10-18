@@ -4,6 +4,9 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { IoArrowBackSharp } from "react-icons/io5";
+import { AiFillDelete } from "react-icons/ai";
+import { FaEthereum } from "react-icons/fa";
 
 const fetchCart = async () => {
   const { data } = await axios.get("http://localhost:3001/cart");
@@ -54,7 +57,7 @@ export default function Cart() {
   return (
     <main className={styles.contentCart}>
       <div className={styles.header}>
-        <p>Voltar</p>
+        <IoArrowBackSharp className={styles.back} size={40} />
         <h3>Mochila de compras</h3>
       </div>
       {data.map((el) => (
@@ -64,15 +67,20 @@ export default function Cart() {
               className={styles.img}
               src={el.image}
               alt={el.name}
-              width={100}
-              height={100}
+              width={80}
+              height={80}
               priority={true}
             />
           </div>
           <div className={styles.items}>
             <div className={styles.descriptionItem}>
               <div className={styles.title}>{el.name}</div>
-              <h3 className={styles.price}>{el.price} ETH</h3>
+              <h3 className={styles.price}>
+                <div>
+                  <FaEthereum className={styles.coin} />
+                </div>
+                {el.price} ETH
+              </h3>
             </div>
             <div className={styles.quantityContent}>
               <div className={styles.quantity}>
@@ -80,14 +88,19 @@ export default function Cart() {
                 <p>{quantities[el.id] || 1}</p>
                 <button onClick={() => handleDecrement(el.id)}>-</button>
               </div>
-              <h4>apagar</h4>
+              <AiFillDelete className={styles.delete} size={30} />
             </div>
           </div>
         </div>
       ))}
       <div className={styles.total}>
         <h3>Total</h3>
-        <h3>{total} ETH</h3>
+        <div className={styles.coin}>
+          <div >
+            <FaEthereum className={styles.coin} />
+          </div>
+          {total} ETH
+        </div>
       </div>
       <div className={styles.btnBuyContent}>
         <button className={styles.btnBuy}>Finalizar compra</button>

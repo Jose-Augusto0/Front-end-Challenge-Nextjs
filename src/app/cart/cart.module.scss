@@ -1,22 +1,33 @@
 .contentCart{
-    border: 1px solid red;
     width: 430px;
+    background-color: #232323;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .header{
     display: flex;
-    border: 1px solid green;
     justify-content: space-between;
     margin: 100px 50px;
+    align-items: center;
+}
+
+.back{
+    color: #ff8310;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
 }
 
 .contentItemsCart{
     display: flex;
     height: 150px;
-    border: 1px solid purple;
     align-items: center;
     padding: 10px;
     gap: 10px;
+    background-color: #393939;
 }
 
 .items{
@@ -27,29 +38,60 @@
     justify-content: space-between;
 }
 
+.image{
+    padding: 15px;
+    background-color: #232323 ;
+}
+
+.delete{
+    background-color: #FF8310;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
 .descriptionItem{
-    border: 1px solid yellow;
     gap: 5px;
     display: flex;
     flex-direction: column;
 }
-.quantityContent{
-    border: 1px solid blue;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
 
-.quantity{
-    border: 1px solid gray;
+
+.price{
     display: flex;
+    gap: 10px;
+    align-items: center;
+   
 }
-.quantity p{
+.price div{
+    background-color: #627EEA;
+    border-radius:50% ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 5px;
 }
 
+.quantityContent{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.quantity{
+    display: flex;
+}
+.quantity p{
+    padding: 5px 8px;
+    background-color: #232323;
+}
+
 .quantity button{
-   padding: 5px;
+    padding: 5px 8px;
+   cursor: pointer;
+   background-color: #232323;
+   border: transparent;
 }
 
 .total{
@@ -59,6 +101,23 @@
     align-items: center;
     margin: 50px 20px;
 }
+
+.coin{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.coin div{
+    background-color: #627EEA;
+    border-radius:50% ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
 
 .btnBuyContent{
     margin: 50px 0px 80px 0px;
@@ -70,9 +129,10 @@
 }
 
 .btnBuy{
-    width: 300px;
+    width: 380px;
     padding: 20px;
     border-radius: 8px;
     border: transparent;
     background-color: #FF8310;
+    cursor: pointer;
 }

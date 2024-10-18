@@ -3,8 +3,10 @@ import Image from "next/image";
 import styles from "./page.module.scss";
 import axios from "axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "./store/cartSlice";
+import { RiShoppingBagFill } from "react-icons/ri";
+import { FaEthereum } from "react-icons/fa";
 
 const fetchNfts = async () => {
   const { data } = await axios.get(
@@ -18,8 +20,8 @@ const fetchCart = async () => {
   return data;
 };
 
-const addToCartApi = async (product) => {
-  const response = await axios.post("http://localhost:3001/cart", product);
+const addToCartApi = async (nft) => {
+  const response = await axios.post("http://localhost:3001/cart", nft);
   return response.data;
 };
 
@@ -27,12 +29,20 @@ export default function Home() {
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
 
-  const { data: products, error: productsError, isLoading: productsLoading } = useQuery({
-    queryKey: ["products"],
+  const {
+    data: data,
+    error: dataError,
+    isLoading: dataLoading,
+  } = useQuery({
+    queryKey: ["data"],
     queryFn: fetchNfts,
   });
 
-  const { data: cartItems, error: cartError, isLoading: cartLoading } = useQuery({
+  const {
+    data: cartItems,
+    error: cartError,
+    isLoading: cartLoading,
+  } = useQuery({
     queryKey: ["cart"],
     queryFn: fetchCart,
   });
@@ -44,30 +54,30 @@ export default function Home() {
     },
   });
 
-  const handleAddToCart = (product) => {
-    mutation.mutate(product);
-    dispatch(addToCart(product));
+  const handleAddToCart = (nft) => {
+    mutation.mutate(nft);
+    dispatch(addToCart(nft));
   };
 
-  if (productsLoading) return <div>Carregando produtos...</div>;
-  if (productsError) return <div>Erro ao carregar produtos: {productsError.message}</div>;
-
+  if (dataLoading) return <div>Carregando nft's...</div>;
+  if (dataError) return <div>Erro ao carregar nft's: {dataError.message}</div>;
 
   if (cartLoading) return <div>Carregando carrinho...</div>;
-  if (cartError) return <div>Erro ao carregar o carrinho: {cartError.message}</div>;
+  if (cartError)
+    return <div>Erro ao carregar o carrinho: {cartError.message}</div>;
 
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>StarSoft</h1>
+        <h1 className={styles.title}>Starsoft</h1>
         <span className={styles.cart}>
-          <i>Cart</i>
-          <a>{cartItems.length}</a>
+          <RiShoppingBagFill color="#ff8310" size={30} />
+          <p>{cartItems.length}</p>
         </span>
       </header>
 
       <div className={styles.contentItems}>
-        {products.map((el) => (
+        {data.map((el) => (
           <div key={el.id} className={styles.item}>
             <div className={styles.contentImg}>
               <Image
@@ -85,7 +95,12 @@ export default function Home() {
               <p className={styles.description}>{el.description}</p>
             </div>
             <div className={styles.box2}>
-              <h2 className={styles.price}>{el.price} ETH</h2>
+              <div className={styles.price}>
+                <div className={styles.coin}>
+                  <FaEthereum />
+                </div>
+                <h2>{el.price} ETH</h2> 
+              </div>
               <button
                 className={styles.addCart}
                 onClick={() => handleAddToCart(el)}
