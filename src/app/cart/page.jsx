@@ -19,6 +19,11 @@ const deleteFromCartApi = async (itemId) => {
   return response.data;
 };
 
+const clearCartApi = async () => {
+  const response = await axios.delete("http://localhost:3001/cart");
+  return response.data;
+};
+
 export default function Cart({ onClose }) {
   const queryClient = useQueryClient();
   const { data, error, isLoading } = useQuery({
@@ -27,6 +32,7 @@ export default function Cart({ onClose }) {
   });
 
   const [quantities, setQuantities] = useState({});
+  const [purchaseCompleted, setPurchaseCompleted] = useState(false); 
 
   useEffect(() => {
     if (data) {
@@ -58,6 +64,16 @@ export default function Cart({ onClose }) {
       const newQuantity = (prev[id] || 1) - 1;
       return { ...prev, [id]: newQuantity < 1 ? 1 : newQuantity };
     });
+  };
+
+  const handleFinalizePurchase = async () => {
+    try {
+      await clearCartApi(); 
+      setPurchaseCompleted(true); 
+      queryClient.invalidateQueries(["cart"]); 
+    } catch (error) {
+      alert("Erro ao finalizar a compra. Por favor, tente novamente.");
+    }
   };
 
   if (isLoading) return <div>Carregando carrinho...</div>;
@@ -131,7 +147,9 @@ export default function Cart({ onClose }) {
         </div>
       </div>
       <div className={styles.btnBuyContent}>
-        <button className={styles.btnBuy}>Finalizar compra</button>
+        <button className={styles.btnBuy} onClick={handleFinalizePurchase}>
+          {purchaseCompleted ? "Compra finalizada!" : "Finalizar compra"}
+        </button>
       </div>
     </motion.main>
   );
