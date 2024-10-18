@@ -1,7 +1,7 @@
 "use client";
 import styles from "./cart.module.scss";
 import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
@@ -13,7 +13,13 @@ const fetchCart = async () => {
   return data;
 };
 
+const deleteFromCartApi = async (itemId) => {
+  const response = await axios.delete(`http://localhost:3001/cart/${itemId}`);
+  return response.data;
+};
+
 export default function Cart() {
+  const queryClient = useQueryClient();
   const { data, error, isLoading } = useQuery({
     queryKey: ["cart"],
     queryFn: fetchCart,
@@ -30,6 +36,17 @@ export default function Cart() {
       setQuantities(initialQuantities);
     }
   }, [data]);
+
+  const mutation = useMutation({
+    mutationFn: deleteFromCartApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["cart"]);
+    },
+  });
+
+  const handleDelete = (itemId) => {
+    mutation.mutate(itemId);
+  };
 
   const handleIncrement = (id) => {
     setQuantities((prev) => ({ ...prev, [id]: (prev[id] || 1) + 1 }));
@@ -88,7 +105,11 @@ export default function Cart() {
                 <p>{quantities[el.id] || 1}</p>
                 <button onClick={() => handleDecrement(el.id)}>-</button>
               </div>
-              <AiFillDelete className={styles.delete} size={30} />
+              <AiFillDelete
+                className={styles.delete}
+                size={30}
+                onClick={() => handleDelete(el.id)}
+              />
             </div>
           </div>
         </div>
@@ -96,7 +117,7 @@ export default function Cart() {
       <div className={styles.total}>
         <h3>Total</h3>
         <div className={styles.coin}>
-          <div >
+          <div>
             <FaEthereum className={styles.coin} />
           </div>
           {total} ETH

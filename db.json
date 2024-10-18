@@ -1,43 +1,11 @@
 {
   "cart": [
     {
-      "id": 1,
-      "name": "Backpack",
-      "description": "Uma mochila resistente com compartimentos secretos, ideal para aventureiros que precisam carregar uma variedade de itens essenciais em suas jornadas épicas.",
-      "image": "https://softstar.s3.amazonaws.com/items/backpack.png",
-      "price": 182,
-      "createdAt": "2024-07-18T23:55:43.238Z"
-    },
-    {
-      "id": 2,
+      "id": "2",
       "name": "Boots of Ppeed",
       "description": "Botas feitas de couro fino e tecido élfico, imbuidas com encantamentos mágicos que conferem velocidade sobrenatural a quem as usa, permitindo movimentos ágeis e fugas rápidas.",
       "image": "https://softstar.s3.amazonaws.com/items/boots-of-speed.png",
       "price": 338,
-      "createdAt": "2024-07-18T23:55:43.238Z"
-    },
-    {
-      "id": 3,
-      "name": "Curved Blade",
-      "description": "Uma lâmina curva, afiada como o olhar de um predador, forjada por habilidosos artesãos orientais. Ideal para ataques furtivos e cortes precisos em combate corpo a corpo.",
-      "image": "https://softstar.s3.amazonaws.com/items/curved-blade.png",
-      "price": 291,
-      "createdAt": "2024-07-18T23:55:43.238Z"
-    },
-    {
-      "id": 4,
-      "name": "Demon Dagger",
-      "description": "Uma adaga negra com runas ígneas incrustadas na lâmina, concedendo ao portador o poder de infligir feridas malditas que queimam a alma de seus adversários.",
-      "image": "https://softstar.s3.amazonaws.com/items/demon-dagger.png",
-      "price": 225,
-      "createdAt": "2024-07-18T23:55:43.238Z"
-    },
-    {
-      "id": 7,
-      "name": "Fire Hammer",
-      "description": "Um martelo pesado com cabeça de aço flamejante, capaz de infligir golpes ardentes que consomem até mesmo o aço mais resistente.",
-      "image": "https://softstar.s3.amazonaws.com/items/fire-hammer.png",
-      "price": 236,
       "createdAt": "2024-07-18T23:55:43.238Z"
     }
   ]
