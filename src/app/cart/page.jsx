@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { AiFillDelete } from "react-icons/ai";
 import { FaEthereum } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const fetchCart = async () => {
   const { data } = await axios.get("http://localhost:3001/cart");
@@ -18,7 +19,7 @@ const deleteFromCartApi = async (itemId) => {
   return response.data;
 };
 
-export default function Cart({onClose}) {
+export default function Cart({ onClose }) {
   const queryClient = useQueryClient();
   const { data, error, isLoading } = useQuery({
     queryKey: ["cart"],
@@ -72,9 +73,15 @@ export default function Cart({onClose}) {
   }, 0);
 
   return (
-    <main className={styles.contentCart}>
+    <motion.main
+      className={styles.contentCart}
+      initial={{ opacity: 0, scale: 0.9 }} 
+      animate={{ opacity: 1, scale: 1 }}   
+      exit={{ opacity: 0, scale: 0.9 }}    
+      transition={{ duration: 0.3 }}      
+    >
       <div className={styles.header}>
-        <IoArrowBackSharp className={styles.back} size={40} onClick={onClose}/>
+        <IoArrowBackSharp className={styles.back} size={40} onClick={onClose} />
         <h3>Mochila de compras</h3>
       </div>
       {data.map((el) => (
@@ -126,6 +133,6 @@ export default function Cart({onClose}) {
       <div className={styles.btnBuyContent}>
         <button className={styles.btnBuy}>Finalizar compra</button>
       </div>
-    </main>
+    </motion.main>
   );
 }
